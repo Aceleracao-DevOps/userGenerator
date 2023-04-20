@@ -18,6 +18,7 @@ app.get("/add", async (req: Request, res: Response) => {
     });
     res.status(httpStatus.CREATED).send(user);
   } catch (error) {
+    console.log(error)
     res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
   }
 });
