@@ -1,0 +1,21 @@
+name: Pull Request on Github
+on: [pull_request]
+jobs:
+  PullRequest-GitHub:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Make a new envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_PORT: 5000
+          envkey_POSTGRES_USER: "postgres"
+          envkey_POSTGRES_PASSWORD: "postgres"
+          envkey_POSTGRES_DB: "names"
+          envkey_DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/names"
+          directory: back-end
+          file_name: .env.test
+          fail_on_empty: true
+      - name: Run tests backend
+        run: docker compose -f docker-compose-test.yml run node npm run test
