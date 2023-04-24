@@ -31,6 +31,8 @@ jobs:
         run: docker compose down
       - name: Delete react docker volume
         run: if docker volume ls --quiet --filter name=usergenerator_react-volume | grep -q .; then docker volume rm usergenerator_react-volume; fi
+      - name: Delete ssl docker volume 
+        run: if docker volume ls --quiet --filter name=usergenerator_ssl-certs | grep -q .; then docker volume rm usergenerator_ssl-certs; fi
       - name: Build docker images
         run: docker compose build
       - name: Run docker compose up
