@@ -38,6 +38,7 @@ services:
     restart: always
     ports:
       - 80:80
+      - 443:443
     volumes:
       - react-volume:/var/www/html
       - ssl-certs:/certs
